@@ -1,65 +1,62 @@
-# Claude Code: Mastery & Advanced Workflows
+# Claude Code: Panduan Workflow & Tips Lanjutan (Deep Dive)
 
-This repository explains and demonstrates advanced techniques for using **Claude Code**, based on tips shared by its creator, Boris Cherny. These workflows are designed to improve efficiency, automate repetitive tasks, and enable seamless cross-device development.
+![Claude Code](https://code.claude.com/assets/hero-terminal.png)
 
-## 🚀 Key Features & Slash Commands
-
-### 1. Context-Aware Interruption (`/btw`)
-The `/btw` (By The Way) command allows you to ask clarifying questions or side tasks without breaking Claude's current focus.
-- **Why use it:** Keeps the main task clean while leveraging the full session context for quick answers.
-- **Example:** `... [Claude is refactoring a large file] ... /btw "Wait, does this match the interface in types.ts?"`
-
-### 2. Automation Loops (`/loop`)
-Automate repetitive checks or monitoring tasks within the terminal.
-- **How it works:** Runs a specific prompt at set intervals.
-- **Usage:** `/loop "Every 30m, check my @gmail for urgent security alerts and summarize them."`
-
-### 3. Persistent Tasks (`/schedule`)
-Schedule tasks that outlive your current terminal session.
-- **Desktop Tasks:** Run as long as the app is open.
-- **Cloud Tasks:** Run on Anthropic’s servers (even if your PC is off).
-- **Example:** `/schedule "Every Friday at 5pm, generate a summary of all git commits this week and save to reports/weekly.md"`
-
-### 4. Cross-Device Mobility (`/teleport`)
-Move your active development session between machines.
-- **Workflow:** Start a session on your desktop, `/teleport` it to the cloud, and then pull it to your laptop or phone using `/remote-control`.
+Repository ini adalah panduan komprehensif untuk menguasai **Claude Code**, AI CLI otonom dari Anthropic. Materi di sini dikembangkan berdasarkan wawasan dari Boris Cherny (pencipta Claude Code) untuk mengoptimalkan pengalaman coding Anda.
 
 ---
 
-## 🛠️ Workspace & Configuration Tips
+## 🧠 Pemahaman Filosofi: Agentic Workflow
+Claude Code bukan sekadar chatbot di terminal; ia adalah sebuah **Agent**. Perbedaan utamanya adalah kemampuannya untuk:
+1. **Membaca Konten:** Memahami struktur direktori dan isi file secara mendalam.
+2. **Menjalankan Perintah:** Menjalankan `npm test`, `git commit`, atau script custom.
+3. **Self-Correct:** Jika sebuah perintah gagal (misal: test error), ia akan menganalisis outputnya dan mencoba memperbaikinya secara otomatis.
 
-### Multi-Directory Access (`--add-dir`)
-Reference multiple codebases or libraries simultaneously by adding directories at startup.
+---
+
+## 🚀 Perintah "Slash" yang Mengubah Permainan
+
+### 1. `/btw` (By The Way) - Konteks Tanpa Gangguan
+Seringkali saat Claude sedang mengerjakan tugas besar (seperti refactoring 10 file), Anda teringat sesuatu.
+- **Workflow Lama:** Menunggu selesai atau menghentikan proses.
+- **Workflow Baru:** Gunakan `/btw`. Claude akan memberikan jawaban cepat menggunakan konteks saat ini tanpa menghentikan "tugas utama" yang sedang ia kerjakan di latar belakang.
+- *Contoh:* `/btw "Ngomong-ngomong, apakah fungsi ini sudah mendukung async?"`
+
+### 2. `/loop` - Otomatisasi Observasi
+Mengubah Claude menjadi pengawas (monitor).
+- **Workflow:** Jalankan prompt secara berulang dengan interval tertentu.
+- **Kasus Penggunaan:** Memantau log produksi, mengecek status build CI/CD, atau menunggu email masuk.
+- *Contoh:* `/loop "Cek file error.log setiap 10 menit. Jika ada error 'Timeout', berikan ringkasannya."`
+
+### 3. `/schedule` - Eksekusi Jangka Panjang
+Memisahkan tugas dari sesi terminal Anda.
+- **Desktop:** Berjalan selama aplikasi Claude terbuka.
+- **Cloud:** Berjalan di server Anthropic. Sangat cocok untuk tugas yang memakan waktu lama (seperti migrasi database besar atau audit keamanan seluruh repo).
+
+---
+
+## 👁️ Visual Verification: Build-Test-Verify
+Integrasi dengan **Chrome Extension** memungkinkan Claude memiliki "mata".
+- **Step 1:** Claude menulis kode UI (React/HTML).
+- **Step 2:** Claude menjalankan server lokal.
+- **Step 3:** Claude membuka browser secara otomatis, mengambil screenshot, dan mendeteksi jika ada elemen yang berantakan atau error di console.
+- **Step 4:** Claude memperbaiki kode berdasarkan apa yang ia "lihat".
+
+---
+
+## 📂 Manajemen Ruang Kerja (Workspace)
+
+### Akses Multi-Direktori
+Jangan membatasi Claude hanya pada satu folder. Gunakan flag `--add-dir` untuk memberikan referensi library atau dokumentasi eksternal.
 ```bash
-claude --add-dir ~/libs/utils --add-dir ~/projects/shared-types
+claude --add-dir ../shared-components --add-dir ../api-docs
 ```
 
-### Persistent Settings (`settings.json`)
-Automate your workspace setup by defining trusted folders in your configuration.
-- **Location:** Typically in `~/.claude/settings.json` or project-specific config.
-- *See `examples/settings.json` in this repo.*
-
 ---
 
-## 👁️ Visual Verification (Chrome Extension)
-Claude can now "see" the apps it builds.
-1. Enable the **Claude in Chrome** beta extension.
-2. Claude will automatically launch a browser to:
-   - Verify UI changes.
-   - Debug console errors.
-   - Run end-to-end tests visually.
+## 📱 Mobile & Remote Control: Dispatch
+Fitur **Dispatch** memungkinkan Anda mengontrol sesi Claude di PC melalui smartphone. 
+- Anda bisa sedang berada di luar rumah, namun memerintahkan Claude di PC kantor untuk menjalankan build atau mengirimkan laporan via Slack melalui aplikasi mobile.
 
 ---
-
-## 📱 Mobile & Remote Workflows
-- **Code on Mobile:** Use the "Code" tab in the Claude iOS/Android app to edit your repo on the go.
-- **Dispatch:** Use your phone as a remote control for your desktop Claude instance to handle emails, Slack, or file management.
-
----
-
-## 🧪 Strategic Workflows
-- **Parallel Sessions:** Don't wait for one task to finish. Run multiple `claude` instances in different terminal tabs for different sub-tasks.
-- **Skill Creation:** Identify workflows you do more than 3 times (e.g., "Add license headers", "Fix lint errors") and ask Claude to create a persistent "Skill" for it.
-
----
-*Reference: [XDA Developers - Claude Code Creator Tips](https://www.xda-developers.com/claude-codes-creator-keeps-sharing-tips-and-they-all-made-my-experience-better/)*
+*Referensi: [XDA Developers - Claude Code Creator Tips](https://www.xda-developers.com/claude-codes-creator-keeps-sharing-tips-and-they-all-made-my-experience-better/)*
