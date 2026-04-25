@@ -1,0 +1,9 @@
+{
+  "trustedFolders": [
+    "~/projects/main-app",
+    "~/projects/shared-ui-lib",
+    "~/docs/company-guidelines"
+  ],
+  "defaultModel": "claude-3-7-sonnet-latest",
+  "autoAddDirectories": true
+}
